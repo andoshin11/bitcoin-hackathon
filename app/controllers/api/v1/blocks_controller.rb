@@ -7,15 +7,8 @@ class Api::V1::BlocksController < Api::AbstractController
     blockchain_service = BlockchainService.new
     latest_block_hash = blockchain_service.latest_block
     @latest_block = Block.find_by(result_block: latest_block_hash)
-    puts "検索中"
-    puts latest_block_hash
-    puts @latest_block
-
     if @latest_block.blank?
-      puts "見つからない"
       block_hash = blockchain_service.get_block(latest_block_hash)
-      puts "探してる"
-      puts block_hash
       @latest_block = Block.create(block_hash)
     end
     @latest_block
@@ -27,7 +20,7 @@ class Api::V1::BlocksController < Api::AbstractController
     unless target_block.is_mined
       histories = target_block.histories
 
-      range_start = histories.last.blank? ? target_block.nonce.to_i - 10000 : histories.last.nonce_end + 1
+      range_start = histories.last.blank? ? target_block.nonce.to_i - 150000 : histories.last.nonce_end + 1
 
       puts range_start
       range_end = range_start + 2999
