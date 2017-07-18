@@ -7,12 +7,18 @@ class Api::V1::BlocksController < Api::AbstractController
     blockchain_service = BlockchainService.new
     latest_block_hash = blockchain_service.latest_block
     @latest_block = Block.find_by(result_block: latest_block_hash)
+    puts "検索中"
+    puts latest_block_hash
+    puts @latest_block
 
     if @latest_block.blank?
+      puts "見つからない"
       block_hash = blockchain_service.get_block(latest_block_hash)
+      puts "探してる"
+      puts block_hash
       @latest_block = Block.create(block_hash)
     end
-    # @latest_block = Block.last
+    @latest_block
   end
 
   def range
