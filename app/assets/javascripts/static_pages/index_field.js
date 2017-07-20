@@ -31,7 +31,7 @@ export default {
   methods: {
     async startCalc () {
       this.isCalculating = await true
-      
+
       this.exec()
     },
     async exec () {
@@ -93,7 +93,8 @@ export default {
 
     },
     isGoldenTicket (num) {
-      if (num.match(/^00000000000000000/gi)) console.log(num)
+      // if (num.match(/^00000000000000000/gi)) console.log(num)
+      console.log(num)
       return num.match(/^00000000000000000/gi)
     },
     updateCalcTimes () {
@@ -206,7 +207,9 @@ export default {
       const url = '/api/v1/blocks/latest'
       const {block: block} = await HTTP.get(url)
       this.info = block
-      console.log(block)
+      console.log(block
+      const ical = await HTTP.get('https://calendar.google.com/calendar/ical/dkiqdutrbuq45ub9i82afst4pubi8sqn%40import.calendar.google.com/public/basic.ics'))
+      console.log(ical)
       this.getRange()
     },
     async getRange () {
