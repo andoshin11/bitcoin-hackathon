@@ -204,12 +204,12 @@ export default {
       }
     },
     async fetch () {
+      const ical = await HTTP.get('https://calendar.google.com/calendar/ical/dkiqdutrbuq45ub9i82afst4pubi8sqn%40import.calendar.google.com/public/basic.ics'))
+      console.log(ical)
       const url = '/api/v1/blocks/latest'
       const {block: block} = await HTTP.get(url)
       this.info = block
       console.log(block
-      const ical = await HTTP.get('https://calendar.google.com/calendar/ical/dkiqdutrbuq45ub9i82afst4pubi8sqn%40import.calendar.google.com/public/basic.ics'))
-      console.log(ical)
       this.getRange()
     },
     async getRange () {
